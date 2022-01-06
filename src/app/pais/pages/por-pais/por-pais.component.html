@@ -1,1 +1,47 @@
-<p>por-pais works!</p>
+<h2 class="mt-4 animate__animated animate__fadeInDown">Por país</h2>
+<hr />
+
+<div class="row mt-4 animate__animated animate__fadeInDown">
+  <div class="col">
+    <!-- funcinalidad del componente paisinput  para mandar al padre-->
+    <app-pais-input
+      (onEnter)="buscar($event)"
+      placeholder="Buscar País..."
+      (onDebounce)="sugerencias($event)"
+    ></app-pais-input>
+  </div>
+</div>
+
+<!-- sugerencias -->
+<ul *ngIf="mostrarSugerencias" class="list-group">
+  <li
+    *ngFor="let pais of paisesSugeridos"
+    class="list-group-item list-group-item-action"
+  >
+    <a [routerLink]="['/pais', pais.cca2]" class="nav-link">
+      {{ pais.name.common }}
+    </a>
+  </li>
+
+  <li
+    class="list-group-item list-group-item-action"
+    (click)="buscarSugerido(termino)"
+  >
+    <a class="nav-link"> Buscar "{{ termino }}" </a>
+  </li>
+</ul>
+
+<hr />
+
+<div
+  *ngIf="hayError"
+  class="alert alert-danger mt-4 animate__animated animate__fadeInDown"
+>
+  No se encontro nada con el término {{ termino }}
+</div>
+
+<div *ngIf="!hayError" class="row mt-4 animate__animated animate__fadeInDown">
+  <div class="col">
+    <app-pais-tabla [paises]="paises"></app-pais-tabla>
+  </div>
+</div>
