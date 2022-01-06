@@ -1,0 +1,22 @@
+<h2 class="mt-4 animate__animated animate__fadeInDown">Por Capital</h2>
+<hr />
+
+<div class="row mt-4 animate__animated animate__fadeInDown">
+  <div class="col">
+    <app-pais-input
+      (onEnter)="buscar($event)"
+      placeholder="Buscar Capital..."
+    ></app-pais-input>
+  </div>
+</div>
+<hr />
+
+<div *ngIf="hayError" class="alert alert-danger mt-4 animate__animated animate__fadeInDown">
+  No se encontro nada con el termino {{ termino }}
+</div>
+
+<div *ngIf="!hayError" class="row mt-4 animate__animated animate__fadeInDown">
+  <div class="col">
+    <app-pais-tabla [paises]="capitales"></app-pais-tabla>
+  </div>
+</div>
